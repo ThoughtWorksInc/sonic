@@ -3,17 +3,15 @@ import _ from 'lodash'
 import gulp from 'gulp'
 import gutil from 'gulp-util'
 
-import source from 'vinyl-source-stream'
 import browserify from 'browserify'
 import watchify from 'watchify'
-import rename from 'gulp-rename'
-
-import streamify from 'gulp-streamify'
-import uglify from 'gulp-uglify'
 
 const TASK_NAME = 'browserify'
 
 function whenInProductionDoUglify() {
+  const streamify = require('gulp-streamify')
+  const uglify = require('gulp-uglify')
+
   if (process.env.NODE_ENV === 'production') {
     return streamify(uglify({
       compress: {
@@ -25,21 +23,24 @@ function whenInProductionDoUglify() {
 }
 
 function wrapWithPluginError(originalError) {
-  let message;
+  let message
 
   if (typeof originalError === 'string') {
-    message = originalError;
+    message = originalError
   } else {
-    message = originalError.message.toString();
+    message = originalError.message.toString()
   }
   if (process.env.NODE_ENV === 'production') {
-    throw new Error(message);
+    throw new Error(message)
   }
 
-  gutil.log(new gutil.PluginError(TASK_NAME, message));
+  gutil.log(new gutil.PluginError(TASK_NAME, message))
 }
 
 function bundle(config) {
+  const source = require('vinyl-source-stream')
+  const rename = require('gulp-rename')
+
   return config.bundler.bundle()
     .on('error', (err)=> {
       wrapWithPluginError(err)

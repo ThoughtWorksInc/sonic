@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "gulp lint",
     "start": "gulp dev",
     "build": "babel src -e 0 --out-dir dist"
   },

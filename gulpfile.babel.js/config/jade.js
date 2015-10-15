@@ -1,4 +1,4 @@
-import gulp from 'gulp';
+import gulp from 'gulp'
 
 export default  {
   'entry': `${gulp.config('root.src')}/*.jade`,

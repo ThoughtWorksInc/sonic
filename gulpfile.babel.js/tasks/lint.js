@@ -1,10 +1,10 @@
 import gulp from 'gulp'
 import gutil from 'gulp-util'
-import eslint from 'gulp-eslint'
 
 const TASK_NAME = 'lint'
 
 function lintOnce(fileConf) {
+  const eslint = require('gulp-eslint')
   return gulp.src(fileConf.src)
     .pipe(eslint(fileConf.options))
     .pipe(eslint.formatEach())
@@ -18,4 +18,3 @@ function lint() {
 gulp.task(TASK_NAME, lint)
 
 export default lint
-

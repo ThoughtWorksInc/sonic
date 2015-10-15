@@ -1,4 +1,4 @@
-import gulp from 'gulp';
+import gulp from 'gulp'
 
 export default {
   src: `${gulp.config('root.shared')}`,

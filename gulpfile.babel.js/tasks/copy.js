@@ -1,9 +1,9 @@
 import gulp from 'gulp'
-import rename from 'gulp-rename'
 
 const TASK_NAME = 'copy'
 
 function copyOnce(fileConf) {
+  const rename = require('gulp-rename')
   return gulp.src(fileConf.src)
     .pipe(rename((pathObj)=> {
       if (fileConf.options.flatten) {
