@@ -2,15 +2,13 @@ import _ from 'lodash'
 import path from 'path'
 import gulp from 'gulp'
 import gutil from 'gulp-util'
-import portscanner from 'portscanner'
-import webdriver from 'gulp-webdriver'
 import browserSync from 'browser-sync'
 import selenium from 'selenium-standalone'
-import psNode from 'ps-node';
-
-const TASK_NAME = 'e2e';
+const TASK_NAME = 'e2e'
 
 function e2e(callback) {
+
+  const webdriver = require('gulp-webdriver')
 
   gulp.autoRegister(TASK_NAME, (conf)=> {
 
@@ -39,40 +37,42 @@ function e2e(callback) {
             wdioBin: path.join(process.cwd(), 'node_modules', '.bin', 'wdio')
           })))
           .once('finish', ()=> {
-            seleniumInst.kill();
-            browserSyncInst.exit();
-            callback();
-          });
+            seleniumInst.kill()
+            browserSyncInst.exit()
+            callback()
+          })
       })
       .catch(gutil.log.bind(this))
 
-  });
+  })
 
 }
 
 
 gulp.task(`${TASK_NAME}:clean`, (callback)=> {
+  const psNode = require('ps-node')
   psNode.lookup({
     command: /java/,
     arguments: /selenium-standalone/
   }, (err, resultList)=> {
     if (err) {
-      throw new Error(err);
+      throw new Error(err)
     }
     resultList.forEach((foundProcess)=> {
       if (foundProcess) {
-        console.log('KILLING PID: %s, COMMAND: %s, ARGUMENTS: %s', foundProcess.pid, foundProcess.command, foundProcess.arguments);
-        process.kill(foundProcess.pid);
+        console.log('KILLING PID: %s, COMMAND: %s, ARGUMENTS: %s', foundProcess.pid, foundProcess.command, foundProcess.arguments)
+        process.kill(foundProcess.pid)
       }
-    });
-    callback();
-  });
-});
+    })
+    callback()
+  })
+})
 
-export default gulp.task(TASK_NAME, e2e);
+export default gulp.task(TASK_NAME, e2e)
 
 
 function findAPortNotInUse(options = {}) {
+  const portscanner = require('portscanner')
   return new Promise((resolve, reject)=> {
     portscanner.findAPortNotInUse(
       options.portStart || 1000,
@@ -80,7 +80,7 @@ function findAPortNotInUse(options = {}) {
       '127.0.0.1',
       (err, port)=> {
         return err ? reject(err) : resolve(port)
-      });
+      })
   })
 }
 
@@ -91,13 +91,13 @@ function seleniumInstall(options = {}) {
       progressCb: gutil.log.bind(this)
     }), (err)=> {
       return err ? reject(err) : resolve()
-    });
+    })
   })
 }
 
 function staticServer(options = {}) {
   return new Promise((resolve, reject)=> {
-    const id = _.uniq('e2e');
+    const id = _.uniq('e2e')
     browserSync
       .create(id)
       .init(Object.assign(options, {
@@ -107,7 +107,7 @@ function staticServer(options = {}) {
         port: 9000
       }), (err)=> {
         return err ? reject(err) : resolve(browserSync.get(id))
-      });
+      })
   })
 }
 
@@ -117,11 +117,11 @@ function seleniumServer(options = {}) {
       seleniumArgs: ['-port', options.port]
     }), (err, seleniumInst)=> {
       if (err) {
-        return reject(err);
+        return reject(err)
       }
       gutil.log(`selenium serve on ${options.port}`)
-      seleniumInst.port = options.port;
+      seleniumInst.port = options.port
       return resolve(seleniumInst)
-    });
+    })
   })
 }

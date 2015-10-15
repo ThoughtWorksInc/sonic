@@ -12,11 +12,11 @@ function revCleaner() {
     const manifest = JSON.parse(String(file.contents))
 
     const fileListNeedToClean = Object.keys(manifest)
-      .filter((key)=>key !== manifest[key]);
+      .filter((key)=>key !== manifest[key])
 
     del.sync(fileListNeedToClean, {
       cwd: file.base
-    });
+    })
 
     callback(null, file)
 
@@ -27,7 +27,7 @@ function generateCacheManifest() {
   return mapStream((file, callback)=> {
     const manifest = JSON.parse(String(file.contents))
 
-    file.path = path.join(file.base, 'cache.manifest');
+    file.path = path.join(file.base, 'cache.manifest')
     file.contents = new Buffer(
       [
         `CACHE MANIFEST`,
@@ -40,7 +40,7 @@ function generateCacheManifest() {
         (_.values(_.omit(manifest, [
           'index.html'
         ])) || [])
-      ).join('\n'));
+      ).join('\n'))
 
     callback(null, file)
 
@@ -49,7 +49,7 @@ function generateCacheManifest() {
 
 function revOnce(conf) {
 
-  const revAll = new RevAll(conf.options);
+  const revAll = new RevAll(conf.options)
 
   return gulp.src(conf.src)
     .pipe(revAll.revision())
