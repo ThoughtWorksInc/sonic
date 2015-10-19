@@ -1,11 +1,14 @@
 import gulp from 'gulp'
+import tape from 'gulp-tape'
+import tapSpec from 'tap-spec'
 
 const TASK_NAME = 'test'
 
 function testOnce(conf) {
-  const gulpMocha = require('gulp-spawn-mocha')
-  return gulp.src(conf.src, {read: false})
-    .pipe(gulpMocha(conf.options))
+  return gulp.src(conf.src)
+    .pipe(tape({
+      reporter: tapSpec()
+    }))
 }
 
 function test() {
