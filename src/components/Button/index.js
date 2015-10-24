@@ -13,9 +13,13 @@ export default class Button extends Component {
     super(props, context)
   }
 
+  handleClick() {
+    return true
+  }
+
   render() {
     return (
-      <span className='sonic-button'>{props.text}</span>
+      <button className='sonic-button'>{this.props.text}</button>
     )
   }
 }
