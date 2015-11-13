@@ -6,13 +6,13 @@ export default ()=> {
       `${gulp.config('root.dist')}/{,**/}*.*`
     ],
     options: {
+      server: `${gulp.config('root.dist')}`,
       notify: false,
       logSnippet: false,
       snippetOptions: {
         ignorePaths: 'index.html'
       },
       port: 3001,
-      proxy: 'http://localhost:3000',
       ui: {
         port: 9999
       }

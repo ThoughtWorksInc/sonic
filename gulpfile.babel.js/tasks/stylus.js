@@ -1,10 +1,10 @@
 import gulp from 'gulp'
 import gutil from 'gulp-util'
-import gulpStylus from 'gulp-stylus'
 
 const TASK_NAME = 'stylus'
 
 function stylusOnce(fileConf) {
+  const gulpStylus = require('gulp-stylus')
   return gulp.src(fileConf.entry)
     .pipe(gulpStylus(fileConf.options))
     .pipe(gulp.dest(fileConf.dest))

@@ -1,9 +1,10 @@
 import gulp from 'gulp'
-import gulpSymlink from 'gulp-symlink'
 
 const TASK_NAME = 'symlink'
 
 function symlinkOnce(fileConf) {
+  const gulpSymlink = require('gulp-symlink')
+  
   return gulp.src(fileConf.src)
     .pipe(gulpSymlink(fileConf.dest, {force: true}))
 }
@@ -15,4 +16,3 @@ function symlink() {
 gulp.task(TASK_NAME, symlink)
 
 export default symlink
-

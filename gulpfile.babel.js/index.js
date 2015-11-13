@@ -6,7 +6,6 @@ gulpTaskConfig(gulp)
 
 requireDir('./tasks', {recurse: true})
 
-// gulp.config('root.shared', 'shared')
 gulp.config('root.src', 'src')
 gulp.config('root.dist', 'public')
 
@@ -15,10 +14,10 @@ gulp.config('tasks', requireDir('./config', {recurse: true}))
 gulp.config('tasks.build', {
   taskQueue: [
     'clean',
-    'symlink',
+    // 'symlink',
     'copy',
-    'jade',
-    'stylus',
+    // 'jade',
+    // 'stylus',
     'browserify'
   ].concat(
     process.env.NODE_ENV === 'production' ? [
@@ -28,7 +27,7 @@ gulp.config('tasks.build', {
 
 gulp.task('dev', () => {
   gulp.config(gulp.DEV_MODE, true)
-  gulp.start(['build', 'server'])
+  gulp.start('server', ['watchify'])
 })
 
 gulp.task('default', ['build'])
