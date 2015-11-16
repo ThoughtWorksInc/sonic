@@ -1,9 +1,10 @@
 import gulp from 'gulp'
-import browserSync from 'browser-sync'
 
 const TASK_NAME = 'server'
 
 function serverOnce(callback, fileConf) {
+  const browserSync = require('browser-sync')
+
   browserSync
     .create(TASK_NAME)
     .init(fileConf.options, callback)

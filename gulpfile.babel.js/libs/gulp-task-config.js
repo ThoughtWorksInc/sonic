@@ -50,7 +50,7 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
 
   let conf = gulp.config(['tasks', TASK_NAME])
 
-  conf = conf.index || conf
+  conf = conf && conf.index || conf
 
   if (_.isFunction(conf)) {
     conf = conf()
@@ -64,10 +64,7 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
     return mergeStream.apply(gulp, _.map(conf.files, register.bind(gulp, conf.options)))
   }
 
-  return register(conf)
-
   function register(commonOptions, config) {
-
     if (_.isObject(config)) {
       config.options = _.merge({}, commonOptions, config.options)
     } else {
@@ -82,4 +79,5 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
 
   }
 
+  return register(conf)
 }

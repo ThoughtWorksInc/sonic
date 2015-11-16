@@ -5,10 +5,10 @@ import tapSpec from 'tap-spec'
 const TASK_NAME = 'test'
 
 function testOnce(conf) {
-  return gulp.src(conf.src)
-    .pipe(tape({
-      reporter: tapSpec()
-    }))
+  const gulpMocha = require('gulp-spawn-mocha')
+
+  return gulp.src(conf.src, {read: false})
+    .pipe(gulpMocha(conf.options))
 }
 
 function test() {
