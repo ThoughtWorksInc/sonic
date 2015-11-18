@@ -27,7 +27,7 @@ gulp.config('tasks.build', {
 
 gulp.task('dev', () => {
   gulp.config(gulp.DEV_MODE, true)
-  gulp.start('server', ['watchify'])
+  gulp.start('server', ['copy', 'watchify'])
 })
 
 gulp.task('default', ['build'])
