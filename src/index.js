@@ -1,7 +1,6 @@
 import 'isomorphic-fetch'
 import React from 'react'
 import ReactPerf from 'react-addons-perf'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
@@ -25,7 +24,6 @@ syncReduxAndRouter(hashHistory, store)
 
 window.React = React
 window.Perf = ReactPerf
-injectTapEventPlugin()
 
 render(
   <Provider store={ store }>

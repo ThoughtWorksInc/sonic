@@ -10,7 +10,7 @@ describe('User API', () => {
   })
 
   it('should return user profile', done => {
-    fetchMock.reMock(apiServer + '/me/profile', 'GET', {})
+    fetchMock.reMock(`${apiServer}/me/profile`, 'GET', {})
     userApi.profile().then(response => {
       response.should.be.Existed
       response.should.be.a.Object
@@ -18,9 +18,17 @@ describe('User API', () => {
     })
   })
   it('should return current login user', done => {
+    fetchMock.reMock(`${apiServer}/me/login`, 'POST', {})
     userApi.login().then(response => {
       response.should.be.Existed
       response.should.be.a.Object
+      done()
+    })
+  })
+  it('should handle error when wrong login user', done => {
+    fetchMock.reMock(`${apiServer}/me/login`, 'POST', 403)
+    userApi.login().catch(err => {
+      err.should.be.Existed
       done()
     })
   })

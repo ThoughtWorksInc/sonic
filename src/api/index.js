@@ -5,8 +5,8 @@ if (global.location &&
   /* istanbul ignore next */
   global.location.origin) {
   server = global.location.origin
+  /* istanbul ignore if */
 } else if (process.env.NODE_ENV === 'development') {
-  /* istanbul ignore next */
   server = ''
 } else {
   server = 'http://localhost:3000'
@@ -16,7 +16,7 @@ export const serverAddress = server
 export const apiServer = server + '/api'
 
 export const postJson = (url, data = {}) => {
-  let postData = {
+  const postData = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export const postJson = (url, data = {}) => {
 }
 
 export const getJson = (url) => {
-  let postData = {
+  const postData = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
