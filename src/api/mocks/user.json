@@ -1,0 +1,30 @@
+[{
+  "id": 1,
+  "name": "张打铁",
+  "hasPhoneBound": false,
+  "email": "some@example.com",
+  "gender": "MALE",
+  "address": "some address",
+  "description": "专业打铁二十年",
+  "birthday": "2015-11-09 00:00:00",
+  "phone": "13800138000",
+  "industry": "打铁",
+  "company": "五爷打铁",
+  "education": "打铁铺",
+  "expert": "专业打铁",
+  "reference": "datie.com",
+  "tags": [
+    {
+      "name": "地质",
+      "type": "INDUSTRY"
+    },
+    {
+      "name": "采矿",
+      "type": "INDUSTRY"
+    },
+    {
+      "name": "选矿",
+      "type": "INDUSTRY"
+    }
+  ]
+}]

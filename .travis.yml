@@ -1,0 +1,20 @@
+sudo: true
+language: node_js
+node_js:
+  - "4"
+  - "5"
+before_install:
+- sudo apt-get update -qq
+
+install:
+- sudo apt-get install -qq g++-4.8
+- export CXX="g++-4.8"
+- npm install
+
+before_script:
+- export DISPLAY=:99.0
+- sleep 3
+
+script:
+- npm run test
+- npm run build

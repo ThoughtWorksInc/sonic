@@ -1,0 +1,11 @@
+verbose: false
+instrumentation:
+    root: .
+    extensions:
+        - .js
+reporting:
+    dir: ./dist
+    excludes:
+        - "node_modules/**"
+        - "**/__test__/**"
+        - "*.spec.js"
