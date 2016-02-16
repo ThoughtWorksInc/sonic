@@ -1,37 +1,22 @@
 # sonic
----------------------
+------------------
+| Live Style Guide UI Development Starter
 
-##Setup and start to develop
-npm start
+## Setup and start to develop
+`npm start`
 
-##Code Structure
+## Code Structure
+```plain
 styleguide
-  public/
-    components/
-      Button/
-        1.0.1.json
-        1.0.1.js
-        1.0.1.css
-        1.0.1.html
-      .../
-    app/
-      index.js
-      index.css
-      index.html
-  src/
-    docui/
-    components/
-      Button/
-        1.0.1.js
-        1.0.1.css
-  example/
-    Button(gengerated)/
-      1.0.1.json
-      1.0.1.js
-      1.0.1.css
-      1.0.1.html
+  dist
+    sg
+    components
+  src
+    components
+      Button
+```
 
-##Main features of this project
+## Main features of this project
 1. Live Style Guide
 2. Component Guide Which Easier To Customize
 3. Component Version Control

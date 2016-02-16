@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
-import Home from '../components/Home';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-export default class HomePage extends Component {
+class HomePage extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired
+  };
   render() {
     return (
-      <Home />
-    );
+      <div>HomePage!</div>
+    )
   }
 }
+
+const mapState = (state) => ({})
+
+export default connect(mapState)(HomePage)

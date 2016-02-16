@@ -1,11 +1,17 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
+import { createStore, applyMiddleware, compose } from 'redux'
+import { syncHistory } from 'react-router-redux'
+import thunk from 'redux-thunk'
+import promise from 'redux-promise'
+import rootReducer from '../reducers'
 
-const finalCreateStore = compose(
-  applyMiddleware(thunk)
-)(createStore);
+export default function configureStore(initialState, history) {
+  const historyMiddleware = syncHistory(history)
 
-export default function configureStore(initialState) {
-  return finalCreateStore(rootReducer, initialState);
+  const store = compose(
+    applyMiddleware(historyMiddleware, thunk, promise)
+  )(createStore)(rootReducer, initialState)
+
+  historyMiddleware.listenForReplays(store)
+
+  return store
 }

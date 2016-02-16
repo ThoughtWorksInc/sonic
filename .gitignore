@@ -1,5 +1,6 @@
 *.404
 public/
+dist/
 
 node_modules/
 __generated/

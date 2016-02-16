@@ -1,30 +1,31 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { reduxReactRouter } from 'redux-router';
-import { persistState } from 'redux-devtools';
-import thunk from 'redux-thunk';
-import createHashHistory from 'history/lib/createHashHistory';
-import rootReducer from '../reducers';
-import DevTools from '../containers/DevTools';
+import { createStore, applyMiddleware, compose } from 'redux'
+import { persistState } from 'redux-devtools'
+import { syncHistory } from 'react-router-redux'
+import thunk from 'redux-thunk'
+import promise from 'redux-promise'
+import rootReducer from '../reducers'
+import DevTools from '../utils/DevTools'
 
-const history = createHashHistory();
-
-export default function configureStore(initialState, routes) {
+export default function configureStore(initialState, history) {
+  const historyMiddleware = syncHistory(history)
   const store = compose(
-    reduxReactRouter({routes, history}),
-    applyMiddleware(thunk),
+    applyMiddleware(historyMiddleware, thunk, promise),
     DevTools.instrument(),
-    persistState(
-      window.location.href.match(
-        /[?&]debug_session=([^&]+)\b/
-      )
-    )
-  )(createStore)(rootReducer, initialState);
+    persistState(getDebugSessionKey())
+  )(createStore)(rootReducer, initialState)
+
+  historyMiddleware.listenForReplays(store)
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers'))
-    );
+      store.replaceReducer(require('../reducers').default)
+    )
   }
+  return store
+}
 
-  return store;
+function getDebugSessionKey() {
+  return global.location.href.match(
+        /[?&]debug_session=([^&]+)\b/
+      )
 }

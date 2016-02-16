@@ -1,28 +1,21 @@
-import 'babel-core/polyfill';
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { ReduxRouter } from 'redux-router';
-import routes from './routes';
-import configureStore from './store/configureStore';
-import './app.css';
+import { hashHistory } from 'react-router'
 
-const initialState = {};
-const store = configureStore(initialState, routes);
+import baseApp from './baseApp'
+import routes from './routes'
+import configureStore from './store/configureStore'
 
-render(
-  <div>
-    <Provider store={store}>
-      <ReduxRouter />
-    </Provider>
-  </div>,
-  document.getElementById('root')
-);
+const state = {
+  shared: {
+    app: {},
+    user: {}
+  }
+}
 
 if (process.env.NODE_ENV !== 'production') {
-  // Use require because imports can't be conditional.
-  // In production, you should ensure process.env.NODE_ENV
-  // is envified so that Uglify can eliminate this
-  // module and its dependencies as dead code.
-  // require('./createDevToolsWindow')(store);
+  require('./api/mocks')
 }
+
+const initialState = Object.assign(state, global.__INITIAL_STATE__ || {})
+const store = configureStore(initialState, hashHistory)
+
+baseApp(store, routes)

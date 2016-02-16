@@ -1,11 +1,20 @@
 body {
-  position: relative;
-  color: white;
-  height: 100vh;
-  background-color: #232C39;
-  background-image: linear-gradient(45deg, rgba(0, 216, 255, .5) 10%, rgba(0, 1, 127, .7));
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
   font-family: Arial, Helvetica, Helvetica Neue;
-  overflow-y: hidden;
+  font-size: 18px;
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 h2 {
@@ -13,25 +22,21 @@ h2 {
   font-size: 2.25rem;
   font-weight: bold;
   letter-spacing: -.025em;
-  color: #fff;
-}
-
-p {
-  font-size: 24px;
+  color: #222;
 }
 
 li {
   list-style: none;
 }
-
+img {
+  max-width: 100%;
+}
 a {
   color: white;
-  opacity: .75;
   text-decoration: none;
 }
 
 a:hover {
-  opacity: 1;
   text-decoration: none;
   cursor: pointer;
 }

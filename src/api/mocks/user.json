@@ -1,0 +1,46 @@
+[{
+  "id": 1,
+  "name": "张打铁",
+  "hasPhoneBound": false,
+  "email": "some@example.com",
+  "gender": "MALE",
+  "address": "some address",
+  "description": "专业打铁二十年",
+  "birthday": "2015-11-09",
+  "phone": "13800138000",
+  "industry": "打铁",
+  "company": "五爷打铁",
+  "education": "打铁铺",
+  "expert": "专业打铁",
+  "reference": "datie.com",
+  "tags": [
+    {
+      "name": "地质",
+      "type": "INDUSTRY"
+    },
+    {
+      "name": "采矿",
+      "type": "ORES"
+    },
+    {
+      "name": "采矿公司",
+      "type": "ORGANIZATION"
+    },
+    {
+      "name": "12年",
+      "type": "EXPERIENCE"
+    },
+    {
+      "name": "顾问",
+      "type": "SERVICE"
+    },
+    {
+      "name": "110",
+      "type": "PROVINCE"
+    },
+    {
+      "name": "采矿咨询",
+      "type": "ORG_INDUSTRY_CAT"
+    }
+  ]
+}]

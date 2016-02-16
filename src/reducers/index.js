@@ -1,10 +1,18 @@
-import { combineReducers } from 'redux';
-import { routerStateReducer  } from 'redux-router';
-import counter from './counter';
+import { combineReducers } from 'redux'
+import { routeReducer as routing } from 'react-router-redux'
+import { reducer as formReducer } from 'redux-form'
+
+import app from './app'
+
+const sharedDataReducer = combineReducers({
+  app
+})
 
 const rootReducer = combineReducers({
-  counter,
-  router: routerStateReducer
-});
+  shared: sharedDataReducer,
 
-export default rootReducer;
+  form: formReducer,
+  routing
+})
+
+export default rootReducer
