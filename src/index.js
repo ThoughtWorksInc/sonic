@@ -6,8 +6,7 @@ import configureStore from './store/configureStore'
 
 const state = {
   shared: {
-    app: {},
-    user: {}
+    app: {}
   }
 }
 
